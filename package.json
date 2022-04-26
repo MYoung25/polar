@@ -1,0 +1,24 @@
+{
+  "name": "polar-cli",
+  "packageManager": "yarn@3.2.0",
+  "version": "0.1.1",
+  "main": "index.js",
+  "repository": "git@github.com:MYoung25/polar.git",
+  "author": "Michael Young <michael25young25@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "utils"
+  ],
+  "bin": {
+    "polar": "./utils/index.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.27",
+    "@types/yargs": "^17.0.10"
+  }
+}

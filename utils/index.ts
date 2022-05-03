@@ -13,9 +13,9 @@ yargs(hideBin(process.argv))
   }, (argv) => {
     require('./entity/create')
   })
-  .command('permissions:seed', 'seed route permissions to database', (yargs) => {
+  .command('routeindex:regenerate', 'regenerate routes/index.ts', (yargs) => {
     return yargs
   }, (argv) => {
-    require('./permissions/seed')
+    require('./entity/regenerate')
   })
   .parse()

@@ -8,6 +8,7 @@ module.exports = function () {
 
     return `import express, { Request, Response } from 'express'
 import helmet from 'helmet'
+import cors from 'cors'
 import mongoose from 'mongoose'
 import { setupPassport } from "./auth"
 ${
@@ -19,6 +20,7 @@ ${
 export const app = express()
 
 app.use(helmet())
+app.use(cors(config.cors))
 
 app.get('/ping', (req: Request, res: Response) => {
   const { readyState } = mongoose.connection

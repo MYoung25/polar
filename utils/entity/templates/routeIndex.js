@@ -10,6 +10,7 @@ module.exports = function () {
 import helmet from 'helmet'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import { config } from '../config'
 import { setupPassport } from "./auth"
 ${
     routes

@@ -20,7 +20,7 @@ export interface I${entityName} {
  *                  example: '627afea4acf098768c92b855'
  *              name:
  *                  type: string
- *                  example: 'permissions.get'
+ *                  example: '${entityName}'
  */
 export const ${entityName.toLowerCase()}Schema = new Schema({
     name: String

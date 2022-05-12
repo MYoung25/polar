@@ -7,13 +7,13 @@ import { userHasPermissions } from './auth/middleware'
 /**
  * @openapi
  * tags: 
- *  - name: ${entityName.toLowercase()}
+ *  - name: ${entityName.toLowerCase()}
  *    description: ${entityName}
  */
 const router = Router()
 /**
  * @openapi
- * /${entityName}:
+ * /${entityName.toLowerCase()}:
  *  get:
  *    tags:
  *      - ${entityName.toLowerCase()}

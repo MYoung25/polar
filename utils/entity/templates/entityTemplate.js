@@ -24,7 +24,7 @@ export interface I${entityName} {
  */
 export const ${entityName.toLowerCase()}Schema = new Schema({
     name: String
-})
+}, { timestamps: true })
 
 export const ${entityName} = model<I${entityName}>('${entityName}', ${entityName.toLowerCase()}Schema)
 `

@@ -1,7 +1,7 @@
 {
   "name": "polar-cli",
   "packageManager": "yarn@3.2.0",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "index.js",
   "repository": "git@github.com:MYoung25/polar.git",
   "author": "Michael Young <michael25young25@gmail.com>",

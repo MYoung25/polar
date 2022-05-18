@@ -7,11 +7,10 @@ import { ${testEntityName} as item } from '../../jest/setup'
 import { getLoggedInSuperAdminAgent } from '../../jest/utilities'
 import { app } from './index'
 import { ${entityName} } from '../entities/${entityName}'
-import { ErrnoException } from '../app'
 
 // suppress error messages
 jest.spyOn(console, 'error')
-    .mockImplementation((err: ErrnoException) => {})
+    .mockImplementation(() => ({}))
 
 describe('/api/${entityName}', () => {
     let superadminAgent: request.SuperAgentTest

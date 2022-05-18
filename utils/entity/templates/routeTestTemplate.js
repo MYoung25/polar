@@ -1,6 +1,9 @@
 module.exports = function (entityName) {
+    const testEntityName = entityName.toLowerCase().slice(0, -1)
+
     return `import mongoose from 'mongoose'
 import request from 'supertest'
+import { ${testEntityName} as item } from '../../jest/setup'
 import { getLoggedInSuperAdminAgent } from '../../jest/utilities'
 import { app } from './index'
 import { ${entityName} } from '../entities/${entityName}'
@@ -34,6 +37,13 @@ describe('/api/${entityName}', () => {
             expect(response.statusCode).toBe(401)
         })
 
+        it('returns a 500 if the query is malformed', async () => {
+            const response = await superadminAgent
+                .get('/${entityName}')
+                .query({ _id: 'asdafas' })
+            expect(response.statusCode).toBe(500)
+        })
+
     })
 
     describe('POST', () => {
@@ -58,19 +68,15 @@ describe('/api/${entityName}', () => {
             const response = await request(app).post('/${entityName}').send({ name: '${entityName}' })
             expect(response.statusCode).toBe(401)
         })
+
+        it('returns 500 if the body is malformed', async () => {
+            const response = await superadminAgent.post('/${entityName}').send({ _id: 'asdasfas' })
+            expect(response.statusCode).toEqual(500)
+        })
     
     })
 
     describe('/:id', () => {
-        let item: any
-
-        beforeAll(async () => {
-            item = await new ${entityName}({}).save()
-        })
-
-        afterAll(async () => {
-            await ${entityName}.deleteMany({})
-        })
 
         describe('GET', () => {
 

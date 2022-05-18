@@ -25,28 +25,28 @@ export const app = express()
 const swaggerDefinition = {
     openapi: '3.0.3',
     info: {
-      title: config.npm_package_name,
-      version: config.npm_package_version,
+        title: config.npm_package_name,
+        version: config.npm_package_version,
     },
-  }
-  
-  const swaggerJSDocOptions = {
+}
+
+const swaggerJSDocOptions = {
     swaggerDefinition,
     // Paths to files containing OpenAPI definitions
     apis: ['./src/routes/*.ts', './src/routes/auth/*.ts', './src/entities/*.ts'],
-  }
+}
   
-  const swaggerSpec = swaggerJSDoc(swaggerJSDocOptions);
+const swaggerSpec = swaggerJSDoc(swaggerJSDocOptions);
   
-  const swaggerUiOptions = {
-      customCss: '.swagger-ui .topbar { display: none }',
-      swaggerOptions: {
-          filter: true,
-          tagsSorter: 'alpha'
-      }
-  }
-  app.get("/docs/swagger.json", (req, res) => res.json(swaggerSpec));
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions))  
+const swaggerUiOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    swaggerOptions: {
+        filter: true,
+        tagsSorter: 'alpha'
+    }
+}
+app.get("/docs/swagger.json", (req, res) => res.json(swaggerSpec));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions))  
 
 app.use(helmet())
 app.use(cors(config.cors))

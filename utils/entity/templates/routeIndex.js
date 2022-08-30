@@ -12,6 +12,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
+import pinoHttp from 'pino-http'
 import { config } from '../config'
 import { setupPassport } from "./auth"
 ${
@@ -45,11 +46,12 @@ const swaggerUiOptions = {
         tagsSorter: 'alpha'
     }
 }
+
+app.use(cors(config.cors))
 app.get("/docs/swagger.json", (req, res) => res.json(swaggerSpec));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions))  
 
 app.use(helmet())
-app.use(cors(config.cors))
 
 /** 
  * @openapi
@@ -73,6 +75,7 @@ app.get('/ping', (req: Request, res: Response) => {
   res.sendStatus(status)
 })
 
+app.use(pinoHttp())
 app.use(express.json())
 setupPassport(app)
 

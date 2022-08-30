@@ -31,16 +31,10 @@ describe('/api/${entityName}', () => {
             expect(response.body.length).toBe(1)
         })
         
+        // remove this for public routes
         it('returns a 401 for a user without permissions', async () => {
             const response = await request(app).get('/${entityName}')
             expect(response.statusCode).toBe(401)
-        })
-
-        it('returns a 500 if the query is malformed', async () => {
-            const response = await superadminAgent
-                .get('/${entityName}')
-                .query({ _id: 'asdafas' })
-            expect(response.statusCode).toBe(500)
         })
 
     })

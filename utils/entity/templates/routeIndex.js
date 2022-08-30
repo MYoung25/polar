@@ -75,7 +75,7 @@ app.get('/ping', (req: Request, res: Response) => {
   res.sendStatus(status)
 })
 
-if (config.node_env === 'test') {
+if (config.node_env !== 'test') {
     app.use(pinoHttp())
 }
 app.use(express.json())

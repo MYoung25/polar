@@ -71,13 +71,17 @@ const router = Router()
 router.route('/')
     .get(userHasPermissions(), async (req: Request, res: Response) => {
         try {
-            const { search }: { 
-                search?: Record<string, unknown>,
+            const { name }: {
+                name?: string
             } = req.query
+
+            const searchFor = {
+                name
+            }
 
             const queryOptions = createQueryOptions(req.query)
 
-            const items = await ${entityName}.find(createFilteredQuery(search as Record<string,unknown>, req), undefined, queryOptions)
+            const items = await ${entityName}.find(createFilteredQuery(searchFor, req), undefined, queryOptions)
             res.json(items)
         } catch (e) {
             res.sendStatus(500)
@@ -124,6 +128,11 @@ router.route('/')
  *      operationId: update${entityName}
  *      summary: Update a single ${entityName} record
  *      description: Update a single ${entityName} record
+ *      requestBody:
+ *          content:
+ *              application/json:
+ *                  schema: 
+ *                      $ref: '#/components/schemas/${entityName}'
  *      responses:
  *          200:
  *              description: Success
@@ -165,16 +174,13 @@ router.route('/:id')
     })
     .patch(userHasPermissions(), async (req: Request, res: Response) => {
         try {
-            const item = await ${entityName}.findOneAndUpdate(
-                createFilteredQuery({ _id: req.params.id }, req),
-                req.body,
-                { new: true }
-            )
-            if (item) {
-                res.json(item)
-                return
-            }
-            res.sendStatus(404)
+            const item = await Events.findOne(createFilteredQuery({ _id: req.params.id }, req))
+            if (!item) return res.sendStatus(404)
+
+            item.set(req.body)
+            await item.save()
+
+            res.json(item)
         } catch (e) {
             res.sendStatus(500)
             logger.error(e)

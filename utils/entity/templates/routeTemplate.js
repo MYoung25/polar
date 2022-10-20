@@ -174,7 +174,7 @@ router.route('/:id')
     })
     .patch(userHasPermissions(), async (req: Request, res: Response) => {
         try {
-            const item = await Events.findOne(createFilteredQuery({ _id: req.params.id }, req))
+            const item = await ${entityName}.findOne(createFilteredQuery({ _id: req.params.id }, req))
             if (!item) return res.sendStatus(404)
 
             item.set(req.body)

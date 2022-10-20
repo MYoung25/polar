@@ -62,7 +62,7 @@ function askQuestion () {
                     // save entity
                     insertStringAtRegexPosition(/.+\.save/g, `\tawait ${testEntityName}.save()`)
                     // afterEach delete
-                    insertStringAtRegexPosition(/.+deleteMany.+\$nin.+/g, `\tawait ${entityName}.deleteMany({ _id: { $nin: [${testEntityName}._id] } })`)
+                    insertStringAtRegexPosition(/.+deleteMany.+/, `\tawait ${entityName}.deleteMany({})`)
                     // afterAll delete
                     insertStringAtRegexPosition(/(\s{1,4}|\t)await mongoose\.disconnect/g, `\tawait ${entityName}.deleteMany({})`)
 

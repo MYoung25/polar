@@ -66,7 +66,7 @@ const router = Router()
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#c/components/schemas/${entityName}'
+ *                      $ref: '#/components/schemas/${entityName}'
  */
 router.route('/')
     .get(userHasPermissions(), async (req: Request, res: Response) => {

@@ -15,7 +15,7 @@ jest.spyOn(console, 'error')
 describe('/api/${entityName}', () => {
     let superadminAgent: request.SuperAgentTest
 
-    beforeAll(async () => {
+    beforeEach(async () => {
         superadminAgent = await getLoggedInSuperAdminAgent(app)
     })
 

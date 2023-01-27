@@ -60,7 +60,7 @@ function askQuestion () {
                     // create entity
                     insertStringAtRegexPosition(/export const.+/g, `export const ${testEntityName} = new ${entityName}({})`)
                     // save entity
-                    insertStringAtRegexPosition(/.+\.save/g, `\tawait ${testEntityName}.save()`)
+                    insertStringAtRegexPosition(/.+\.save/g, `\tawait new ${entityName}(${testEntityName}).save()`)
                     // afterEach delete
                     insertStringAtRegexPosition(/.+deleteMany.+/g, `\tawait ${entityName}.deleteMany({})`)
                     // afterAll delete
